@@ -1,22 +1,22 @@
 #!/bin/bash
-cd /home/container
 
-# Fix QEMU temp write
-export TMPDIR=/home/container/tmp
-mkdir -p $TMPDIR
+export HOME=/home/container
+mkdir -p $HOME/.vnc $HOME/tmp
+chmod 700 $HOME/.vnc
+
+export TMPDIR=$HOME/tmp
 
 VNC_PORT=5901
 WS_PORT=${SERVER_PORT:-8443}
 
-echo "[+] QEMU VNC     : localhost:${VNC_PORT}"
-echo "[+] KasmVNC Web  : ${WS_PORT}"
+echo "[+] User: $(id -u)"
+echo "[+] HOME: $HOME"
 
 MODIFIED_STARTUP=$(echo -e ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
 eval ${MODIFIED_STARTUP} &
 
 sleep 2
 
-# Start KasmVNC as VNC proxy
 kasmvncserver \
   --vnc-host localhost \
   --vnc-port ${VNC_PORT} \
