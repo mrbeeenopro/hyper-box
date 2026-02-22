@@ -16,9 +16,10 @@ RUN apt update && apt install -y \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -fsSL https://kasm-static-content.s3.amazonaws.com/kasmvnc/kasmvncserver_bookworm_amd64.deb -o kasmvnc.deb \
-    && apt install -y ./kasmvnc.deb \
-    && rm kasmvnc.deb
+RUN apt update && apt install -y wget gnupg \
+ && wget -O kasmvnc.deb https://github.com/kasmtech/KasmVNC/releases/latest/download/kasmvncserver_bookworm_amd64.deb \
+ && apt install -y ./kasmvnc.deb \
+ && rm kasmvnc.deb
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
