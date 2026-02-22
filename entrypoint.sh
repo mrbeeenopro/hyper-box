@@ -14,14 +14,14 @@ eval ${MODIFIED_STARTUP} &
 
 sleep 3
 
-echo "[+] Starting KasmVNC WebSocket proxy..."
+echo "[+] Starting KasmVNC (proxy-only, no desktop, no https)..."
 
 kasmvncserver \
-  --vnc-host localhost \
-  --vnc-port ${VNC_PORT} \
+  --connect 0.0.0.0:${VNC_PORT} \
+  --web-port ${WS_PORT} \
   --listen 0.0.0.0 \
-  --port ${WS_PORT} \
-  --no-desktop \
-  --no-auth \
-  --cert none \
+  --disable-auth \
+  --disable-https \
+  --no-user \
+  --headless \
   --non-interactive
