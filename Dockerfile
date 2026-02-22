@@ -17,7 +17,7 @@ RUN apt update && apt install -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt update && apt install -y wget gnupg \
- && wget -O kasmvnc.deb https://github.com/kasmtech/KasmVNC/releases/latest/download/kasmvncserver_bookworm_amd64.deb \
+ && wget -O kasmvnc.deb https://github.com/kasmtech/KasmVNC/releases/download/v1.4.0/kasmvncserver_bookworm_1.4.0_amd64.deb \
  && apt install -y ./kasmvnc.deb \
  && rm kasmvnc.deb
 
