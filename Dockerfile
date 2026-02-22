@@ -1,4 +1,5 @@
 FROM debian:bookworm-slim
+LABEL org.opencontainers.image.description main-2
 
 RUN apt update && apt install -y \
     qemu-system-x86 \
